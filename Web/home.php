@@ -1,31 +1,22 @@
+<?php
+    session_start(); 
+?>
+<?php
+    if(!isset($_SESSION['user_details'])){
+        $_SESSION['user_details'] = ['logged_in'=>false];
+    }
+    $user_details = $_SESSION['user_details'];
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="home.js"></script>
+    <?php include('common_heads.php'); ?>
     <style>
-        body {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-        main {
-            flex: 1 0 auto;
-        }
-        .header-nav a{
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        
         .movie_card .btn-large{
             width: 100%;
         }
-        
         .search-wrapper {
             margin: 50px auto;
         }
@@ -35,25 +26,7 @@
 </head>
 
 <body>
-    <div class="navbar-fixed">
-        <nav class="header-nav">
-            <div class="nav-wrapper blue darken-2">
-                <a href="" class="brand-logo">Namma Movies</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a class="tooltipped" data-position="bottom" data-tooltip="Go home">Home</a></li>
-                    <li><a class="tooltipped" data-position="bottom" data-tooltip="About us">About</a></li>
-                    <li><a class="tooltipped" data-position="bottom" data-tooltip="Login">Login</a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">You!<i class="material-icons right">arrow_drop_down</i></a></li>
-                </ul>
-                <ul id="dropdown1" class="dropdown-content">
-                    <li><a href="#!">Profile</a></li>
-                    <li><a href="#!">My Tickets</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#!">Logout</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <?php include('page_header.php'); ?>
     <main>
         <div class="container">
             <div class="row">
@@ -125,48 +98,8 @@
                 </div>
             </div>
         </div>
-
     </main>
-    <footer class="page-footer blue darken-2">
-        <div class="container">
-            <div class="row">
-                <div class="col s3 m3 l3 center">
-                    <a href="https://github.com/srinskit/" target="_blank">
-                        <img src="https://avatars2.githubusercontent.com/u/18577728?s=460&v=4" width="50px" alt=""
-                            class="circle hoverable responsive-img">
-                    </a>
-                </div>
-                <div class="col s3 m3 l3 center">
-                    <a href="https://github.com/srinskit/" target="_blank">
-                        <img src="https://avatars2.githubusercontent.com/u/18577728?s=460&v=4" width="50px" alt=""
-                            class="circle hoverable responsive-img">
-                    </a>
-                </div>
-                <div class="col s3 m3 l3 center">
-                    <a href="https://github.com/srinskit/" target="_blank">
-                        <img src="https://avatars2.githubusercontent.com/u/18577728?s=460&v=4" width="50px" alt=""
-                            class="circle hoverable responsive-img">
-                    </a>
-                </div>
-                <div class="col s3 m3 l3 center">
-                    <a href="https://github.com/srinskit/" target="_blank">
-                        <img src="https://avatars2.githubusercontent.com/u/18577728?s=460&v=4" width="50px" alt=""
-                            class="circle hoverable responsive-img">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php include('page_footer.php'); ?>
 </body>
-<script>
-    $(document).ready(function () {
-        $('.tooltipped').tooltip();
-        $(".dropdown-trigger").dropdown({
-            coverTrigger: false,
-            constrainWidth: false,
-            hover: true
-        });
-    });
-</script>
-
+<?php include('common_scripts.php'); ?>
 </html>
