@@ -1,7 +1,22 @@
+<?php
+    session_start(); 
+?>
+<?php
+    if(!isset($_SESSION['user_details'])){
+        $_SESSION['user_details'] = ['logged_in'=>false];
+    }
+    $user_details = $_SESSION['user_details'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profile</title>
+    <meta charset="utf-8" />
+    <?php include('common_heads.php'); ?>
+    
+	<title>
+		Namma Movies
+	</title>
+   
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -70,7 +85,7 @@
         }
         .jumbotron
         {
-            background:url("p1.jpg");
+            background:url("images/p1.jpg");
             background-size: cover;
         }
         #gg{
@@ -123,10 +138,11 @@
     
 </head>
 <body>
-        
+<main>
+<?php include('page_header.php'); ?>
     <div class="jumbotron">
         <p class=" p">Profile</p>
-        <img src="1.jpg"  id="profimg" alt="" class="img-thumbnail">
+        <img src="images/1.jpg"  id="profimg" alt="" class="img-thumbnail">
         
         <div class="info">
             <h1 class="display-4">
@@ -165,7 +181,7 @@ if ($t < "20") {
             <div class="row">
                 <div class="col s12 m7 l1">
                     <div class="card" id="tickets" style="width: 18rem;">
-                        <img class="card-img-top" src="p1.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="images/p1.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Avengers</h5>
                             <p class="card-text">Some Line</p>
@@ -183,7 +199,7 @@ if ($t < "20") {
                 </div>
                 <div class="col s12 m7 l1">
                     <div class="card" id="tickets" style="width: 18rem;">
-                        <img class="card-img-top" src="p1.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="images/p1.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Avengers</h5>
                             <p class="card-text">Some Line</p>
@@ -201,7 +217,7 @@ if ($t < "20") {
                 </div>
                 <div class="col s12 m7 l1">
                     <div class="card" id="tickets" style="width: 18rem;">
-                        <img class="card-img-top" src="p1.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="images/p1.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Avengers</h5>
                             <p class="card-text">Some Line</p>
@@ -325,12 +341,15 @@ if ($t < "20") {
             
         </div>
     </div>
+    <?php include('page_footer.php'); ?>
+    
+    </main>
     
     
-    
-    
-    <!--===============================================================================================-->
-    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+</body>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
@@ -360,7 +379,6 @@ if ($t < "20") {
         
         gtag('config', 'UA-23581568-13');
 	</script>
-</body>
 <script>
     $('#myTab a').on('click', function (e) {
         e.preventDefault()
@@ -389,6 +407,8 @@ if ($t < "20") {
     });
     
 </script>
+<?php include('common_scripts.php'); ?>
+
 </html>
 
 
