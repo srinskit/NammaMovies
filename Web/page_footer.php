@@ -26,8 +26,8 @@
                 </a>
             </div>
             <div class="col s3 m3 l3 center">
-                <a href="https://github.com/srinskit/" target="_blank">
-                    <img src="https://avatars2.githubusercontent.com/u/18577728?s=460&v=4" width="50px" alt=""
+                <a href="https://github.com/Bharath1998" target="_blank">
+                    <img src="https://avatars0.githubusercontent.com/u/22498571?s=400&v=4" width="50px" alt=""
                         class="circle hoverable responsive-img">
                 </a>
             </div>
