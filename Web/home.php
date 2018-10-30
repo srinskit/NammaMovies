@@ -7,6 +7,18 @@
     }
     $user_details = $_SESSION['user_details'];
 ?>
+<?php
+	$con=mysqli_connect('localhost:3306','srinag','pass','test');
+	if(!$con)
+	{
+		die('Could not connect:'.mysqli_error($con));
+	}
+	mysqli_select_db($con,'test');
+	$query="SELECT name,v from t;";
+	$result=mysqli_query($con,$query);
+    
+	mysqli_close($con);
+?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -18,36 +18,34 @@
 <body>
     <?php include('page_header.php'); ?>
     <main>
-        <center>
-            <div class="contaniner">
-                <div class="row">
-                    <div class="col s12 m6 l5">
-                        <div class="card hoverable">
-                            <div class="card-content">
-                                <div class="container">
-                                    <div class="row">
-                                        <form>
-                                            <div class="input-field">
-                                                <input id="email" type="text" class="validate"><label for="email">Email</label>
-                                            </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field">
-                                            <input id="password" type="text" class="validate"><label for="password">Password</label>
-                                        </div>
-                                    </div>
-                                    </form>
+    <div class="section"></div> 
+    <div class="section"></div> 
+        <div class="contaniner">
+            <div class="row">
+                <div class="card hoverable col s12 m6 l4 offset-m3 offset-l4 center-align">
+                    <div class="card-content">
+                        <h4>Account</h4>
+                        <div class="section"></div> 
+                        <div class="row">
+                            <form>
+                                <div class="input-field">
+                                    <input id="email" type="text" class="validate"><label for="email">Email</label>
                                 </div>
-                            </div>
-                            <div class="card-action">
-                                <a class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Sign up</a>
-                                <a class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Login</a>
+                        </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="password" type="password" class="validate"><label for="password">Password</label>
                             </div>
                         </div>
+                        </form>
+                    </div>
+                    <div class="card-action">
+                        <a class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Sign up</a>
+                        <a class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Login</a>
                     </div>
                 </div>
             </div>
-        </center>
+        </div>
     </main>
     <?php include('page_footer.php'); ?>
 </body>
