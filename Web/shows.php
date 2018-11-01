@@ -15,6 +15,15 @@ if (!isset($_GET['mid'])) {
 } else {
     $mid = $_GET['mid'];
 }
+$query = "select * from movie where mid = $mid";
+$result = mysqli_query($con, $query);
+if (!$result) {
+    header("Location: home.php");
+    die();
+} else {
+    $movie = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+}
 $query = "select t.tname as name, t.address as addr, s.time as time, s.sid as sid from theatre t, shows s where t.tid = s.tid and s.mid = $mid";
 $r1 = mysqli_query($con, $query);
 $hmap = [];
@@ -44,25 +53,12 @@ else{
     <main>
         <div class="row">
             <div class="col s12">
-                <div class="card">
+                <div class="card hoverable">
                     <div class="card-image">
-                        <span class="card-title" style="color: rgb(255, 255, 255)">Card Title</span>
-                        <img src="images/656579.png" style="height: 250px ;z-index: 1;position: relative;">
-                        <span class="card-title">Card Title</span>
+                        <img src="<?php echo ($movie['poster']); ?>" style="height: 250px ;z-index: 1;position: relative;">
                     </div>
-
                     <div class="card-content">
-                        <p>
-                        <?php
-$query = "SELECT mname FROM movie WHERE mid=$mid";
-$result = mysqli_query($con, $query);
-$row = mysqli_fetch_array($result);
-echo $row['mname'];
-?>
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <h4><?php echo($movie['mname']); ?></h4>
                     </div>
                 </div>
             </div>

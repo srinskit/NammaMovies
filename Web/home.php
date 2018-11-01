@@ -74,7 +74,7 @@ mysqli_free_result($result);
                 <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="posters/2.jpg">
+                            <img class="activator" src="posters/<?php echo ($movie['mid'].'.jpg'); ?>">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
@@ -83,7 +83,7 @@ mysqli_free_result($result);
                             <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
                             <p><?php echo ($movie['summary']); ?></p>
                             <div class="card-action">
-                                <a class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
+                                <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
                                     More</a>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ mysqli_free_result($result);
                 <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="posters/2.jpg">
+                            <img class="activator" src="posters/<?php echo ($movie['mid'].'.jpg'); ?>">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
@@ -112,12 +112,12 @@ mysqli_free_result($result);
                             <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
                             <p><?php echo ($movie['summary']); ?></p>
                             <div class="card-action">
-                                <a class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
+                                <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
                                     More</a>
                             </div>
                         </div>
                         <div class="card-action">
-                            <a class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
+                            <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
                                 now</a>
                         </div>
                     </div>
