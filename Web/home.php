@@ -8,15 +8,22 @@ if (!isset($_SESSION['user_details'])) {
 $user_details = $_SESSION['user_details'];
 ?>
 <?php
-$con = mysqli_connect('localhost:3306', 'srinag', 'pass', 'test');
-if (!$con) {
-    die('Could not connect:' . mysqli_error($con));
-}
-mysqli_select_db($con, 'test');
-$query = "SELECT name,v from t;";
+require_once 'config.php';
+$query = "select * from movie order by movie.releasedate desc limit 4";
 $result = mysqli_query($con, $query);
+$latest = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    array_push($latest, $row);
+}
 
-mysqli_close($con);
+$query = "select * from movie order by movie.rating desc limit 4";
+$result = mysqli_query($con, $query);
+$trending = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    array_push($trending, $row);
+}
+
+mysqli_free_result($result);
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,20 +64,21 @@ mysqli_close($con);
         <div class="container">
             <div class="divider"></div>
             <div class="row">
-                <h5>Trending</h5>
-                <div class="col s12 m6 l3">
+                <h5>Latest</h5>
+                <?php foreach ($latest as $movie): ?>
+                <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="posters/2.jpg">
                         </div>
                         <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Movie Name<i class="material-icons right">more_vert</i></span>
+                            <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
                         </div>
                         <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Movie Name<i class="material-icons right">close</i></span>
-                            <p>Movie Summary</p>
+                            <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
+                            <p><?php echo ($movie['summary']); ?></p>
                             <div class="card-action">
-                                <a class="waves-effect waves-light btn-large red"><i class="material-icons right">book</i>Read
+                                <a class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
                                     More</a>
                             </div>
                         </div>
@@ -80,23 +88,26 @@ mysqli_close($con);
                         </div>
                     </div>
                 </div>
+                <?php endforeach;?>
+
             </div>
             <div class="divider"></div>
             <div class="row">
-                <h5>Featured</h5>
-                <div class="col s12 m6 l3">
+                <h5>Trending</h5>
+                <?php foreach ($latest as $movie): ?>
+                <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="posters/2.jpg">
                         </div>
                         <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Movie Name<i class="material-icons right">more_vert</i></span>
+                            <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
                         </div>
                         <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Movie Name<i class="material-icons right">close</i></span>
-                            <p>Movie Summary</p>
+                            <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
+                            <p><?php echo ($movie['summary']); ?></p>
                             <div class="card-action">
-                                <a class="waves-effect waves-light btn-large red"><i class="material-icons right">book</i>Read
+                                <a class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
                                     More</a>
                             </div>
                         </div>
@@ -106,6 +117,7 @@ mysqli_close($con);
                         </div>
                     </div>
                 </div>
+                <?php endforeach;?>
             </div>
         </div>
     </main>
