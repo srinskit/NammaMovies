@@ -15,7 +15,7 @@ if (!isset($_GET['mid'])) {
 } else {
     $mid = $_GET['mid'];
 }
-$query = "select t.tname as name, t.address as addr, s.time as time from theatre t, shows s where t.tid = s.tid and s.mid = $mid";
+$query = "select t.tname as name, t.address as addr, s.time as time, s.sid as sid from theatre t, shows s where t.tid = s.tid and s.mid = $mid";
 $r1 = mysqli_query($con, $query);
 $hmap = [];
 if(!$r1){
@@ -104,7 +104,7 @@ echo $datetime->format('F j');
                             <td><?php echo($name) ?></td>
                             <td>
                             <?php foreach ($row_arr as $row): ?>                        
-                                <a class="waves-effect waves-light btn-large" href="<?php echo("seatMap.php?sid=".$row['sid']); ?>"><?php echo($row['time']) ?></a>
+                                <a class="waves-effect waves-light btn-large" href="<?php echo('SeatMap.php?sid='.$row['sid']); ?>"><?php echo($row['time']); ?></a>
                             <?php endforeach;?>                            
                             </td>
                         </tr>
