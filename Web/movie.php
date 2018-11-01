@@ -46,12 +46,14 @@ if (!isset($_GET['mid'])) {
 	      <div class="col s2"><blockquote class="description"><?php echo ($movie['language']); ?></blockquote></div>
 	      <div class="col s2"><blockquote class="description"><?php echo ($movie['genre']); ?></blockquote></div>
 	      <div class="col s2"><blockquote class="description"><?php echo (date("F jS, Y", strtotime($movie['releasedate']))); ?></blockquote></div>
-	      <div class="col s2"><blockquote class="description"><?php echo ($movie['runningtime'].' minutes'); ?></blockquote></div>
+	      <div class="col s2"><blockquote class="description"><?php echo ($movie['runningtime'] . ' minutes'); ?></blockquote></div>
     	</div>
     </div>
-    <div class="button" align="center" action="shows.php">
-    	<p>BOOK TICKETS</p>
-	</div>
+    <div class="container">
+        <div class="row">
+            <a class="col s2 m6 l6 offset-l3 offset-m3 waves-effect waves-light btn-large blue darken-2" href="shows.php?mid=<?php echo ($movie['mid']); ?>">Book</a>
+        </div>
+    </div>
 	<div>
 		<div class="trailer">
 			<iframe width="500" height="315" src="<?php echo ($movie['trailer']); ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -64,11 +66,11 @@ if (!isset($_GET['mid'])) {
 		<div class="container">
             <div class="row">
                 <div class="col s3 m3 l3 center">
-                    <img src="<?php echo ('/images/actors/'.$movie['a1'].'.png'); ?>" width="50px" alt="A"
+                    <img src="<?php echo ('/images/actors/' . $movie['a1'] . '.png'); ?>" width="50px" alt="A"
                             class="circle hoverable responsive-img">
                 </div>
                 <div class="col s3 m3 l3 center">
-                    <img src="<?php echo ('/images/actors/'.$movie['a2'].'.png'); ?>" width="50px" alt="A"
+                    <img src="<?php echo ('/images/actors/' . $movie['a2'] . '.png'); ?>" width="50px" alt="A"
                             class="circle hoverable responsive-img">
                 </div>
             </div>

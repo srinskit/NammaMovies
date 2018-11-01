@@ -22,7 +22,12 @@ $trending = [];
 while ($row = mysqli_fetch_assoc($result)) {
     array_push($trending, $row);
 }
-
+$query = "select mid, mname from movie";
+$result = mysqli_query($con, $query);
+$all_movies = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    array_push($all_movies, $row);
+}
 mysqli_free_result($result);
 ?>
 <!DOCTYPE html>
@@ -83,7 +88,7 @@ mysqli_free_result($result);
                             </div>
                         </div>
                         <div class="card-action">
-                            <a class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
+                            <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
                                 now</a>
                         </div>
                     </div>
@@ -94,7 +99,7 @@ mysqli_free_result($result);
             <div class="divider"></div>
             <div class="row">
                 <h5>Trending</h5>
-                <?php foreach ($latest as $movie): ?>
+                <?php foreach ($trending as $movie): ?>
                 <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
