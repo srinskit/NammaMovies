@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var a = new Array();
+
     $(".outer-seat").on("click", function () {
         $(this).toggleClass('selected-outerColor');
         $(this).children().toggleClass('selected-innerColor');
