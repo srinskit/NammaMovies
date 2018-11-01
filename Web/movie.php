@@ -1,15 +1,23 @@
+<?php
+    session_start(); 
+?>
+<?php
+    if(!isset($_SESSION['user_details'])){
+        $_SESSION['user_details'] = ['logged_in'=>false];
+    }
+    $user_details = $_SESSION['user_details'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta charset="utf-8" />
+    <?php include('common_heads.php'); ?>
     <link rel="stylesheet" type="text/css" href="movie_page_style.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<title>MOVIE PAGE</title>
+	<title>Movie</title>
 </head>
 <body>
+    <?php include('page_header.php'); ?>
+    <main>
 	<?php
 	$con=mysqli_connect('127.0.0.1:3306','root',NULL,'trial');
 	if(!$con)
@@ -48,6 +56,7 @@
 			<div class="rating">echo $row->rating;</div>
 		</div>
 		<div class="container">
+        </body>
         <div class="row">
             <div class="col s3 m3 l3 center">
                 <img src="echo $r->picture;" width="50px" alt=""
@@ -62,5 +71,8 @@
 	</div>
 	mysqli_close($con);
 	?>
-	</body>
+    </main>
+    <?php include('page_footer.php'); ?>
+</body>
+<?php include('common_scripts.php'); ?>
 </html>

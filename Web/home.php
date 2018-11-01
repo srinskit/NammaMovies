@@ -1,29 +1,28 @@
 <?php
-    session_start(); 
+session_start();
 ?>
 <?php
-    if(!isset($_SESSION['user_details'])){
-        $_SESSION['user_details'] = ['logged_in'=>false];
-    }
-    $user_details = $_SESSION['user_details'];
+if (!isset($_SESSION['user_details'])) {
+    $_SESSION['user_details'] = ['logged_in' => false];
+}
+$user_details = $_SESSION['user_details'];
 ?>
 <?php
-	$con=mysqli_connect('localhost:3306','srinag','pass','test');
-	if(!$con)
-	{
-		die('Could not connect:'.mysqli_error($con));
-	}
-	mysqli_select_db($con,'test');
-	$query="SELECT name,v from t;";
-	$result=mysqli_query($con,$query);
-    
-	mysqli_close($con);
+$con = mysqli_connect('localhost:3306', 'srinag', 'pass', 'test');
+if (!$con) {
+    die('Could not connect:' . mysqli_error($con));
+}
+mysqli_select_db($con, 'test');
+$query = "SELECT name,v from t;";
+$result = mysqli_query($con, $query);
+
+mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <?php include('common_heads.php'); ?>
+    <?php include 'common_heads.php';?>
     <style>
         .movie_card .btn-large{
             width: 100%;
@@ -37,7 +36,7 @@
 </head>
 
 <body>
-    <?php include('page_header.php'); ?>
+    <?php include 'page_header.php';?>
     <main>
         <div class="container">
             <div class="row">
@@ -110,7 +109,7 @@
             </div>
         </div>
     </main>
-    <?php include('page_footer.php'); ?>
+    <?php include 'page_footer.php';?>
 </body>
-<?php include('common_scripts.php'); ?>
+<?php include 'common_scripts.php';?>
 </html>
