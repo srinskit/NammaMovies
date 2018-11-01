@@ -5,15 +5,15 @@ session_start();
 if (!isset($_SESSION['user_details'])) {
     $_SESSION['user_details'] = ['logged_in' => false];
 }
-$user_details = $_SESSION['user_details'];
 ?>
 <?php
+global $result;
 require_once 'config.php';
 if ($_SESSION['user_details']['logged_in'] == false) {
     header("Location: login.php");
     die();
 } else {
-    $query = "select mname, seat_num, tname, address, time from seats st, shows s, movie m, theatre t where st.sid = s.sid and s.mid = m.mid and t.tid = s.tid and uname=''";
+    $query = "select m.mid as xmid, mname, seat_num, tname, address, time from seats st, shows s, movie m, theatre t where st.sid = s.sid and s.mid = m.mid and t.tid = s.tid and uname='".$_SESSION['user_details']['username']."'";
     $result = mysqli_query($con, $query);
 }
 ?>
@@ -168,20 +168,15 @@ if ($_SESSION['user_details']['logged_in'] == false) {
                 <?php while ($movie = mysqli_fetch_array($result)): ?>
                     <div class="col s12 m7 l1">
                         <div class="card" id="tickets" style="width: 18rem;">
-                            <img class="card-img-top" src="images/p1.jpg" alt="Card image cap">
+                            <img class="card-img-top" src="<?php echo('posters/'.$movie['xmid'].'.jpg'); ?>" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo($movie['mname']); ?></h5>
-                                <p class="card-text"><?php echo($movie['time']); ?></p>
+                                <p class="card-text"><?php echo((date("F jS, Y", strtotime($movie['time'])))); ?></p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">AUDI NO : 3</li>
-                                <li class="list-group-item">SEAT NO:14B</li>
-                                <li class="list-group-item">FOOD AND BEVERAGES</li>
+                                <li class="list-group-item">Theatre: <?php echo($movie['tname']); ?></li>
+                                <li class="list-group-item">Seat num: <?php echo($movie['seat_num']); ?></li>
                             </ul>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
-                            </div>
                         </div>
                     </div>
                 <?php endwhile;?>

@@ -1,3 +1,16 @@
+<?php
+session_start();
+?>
+<?php
+if (!isset($_SESSION['user_details'])) {
+    $_SESSION['user_details'] = ['logged_in' => false];
+}
+if ($_SESSION['user_details']['logged_in'] == false) {
+    header("Location: login.php");
+    die();
+}
+$_SESSION['sid'] = $_GET['sid'];
+?>
 <!DOCTYPE html>
 <head>
 	<title>Seat Selection</title>
