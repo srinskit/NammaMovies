@@ -31,10 +31,14 @@ if (!$r1) {
     echo 'HS quota';
 } else {
     while ($row = mysqli_fetch_array($r1)) {
-        if (!array_key_exists($row['name'], $hmap)) {
-            $hmap[$row['name']] = [];
+        $date = explode(' ', $row['time'])[0];
+        if (!array_key_exists($date, $hmap)) {
+            $hmap[$date] = [];
         }
-        array_push($hmap[$row['name']], $row);
+        if (!array_key_exists($row['name'], $hmap[$date])) {
+            $hmap[$date][$row['name']] = [];
+        }
+        array_push($hmap[$date][$row['name']], $row);
     }
 }
 ?>
@@ -60,45 +64,48 @@ if (!$r1) {
                         <h3><?php echo ($movie['mname']); ?></h3>
                         <div class="section"></div>
                         <div class="row">
-            <div class="col s12 m6 l6">
-                <ul class="tabs">
-                    <li class="tab col s3 "><a href="#test1" class="active blue-text" >
-                        <?php print date("F j");?></a>
-                    </li>
-                    <li class="tab col s3"><a href="#test2"  class="blue-text" >
-                            <?php echo (new DateTime('tomorrow'))->format('F j'); ?>
-                        </a>
-                    </li>
-                    <li class="tab col s3"><a href="#test4" class="blue-text" >
-                            <?php echo (new DateTime('tomorrow + 1 day'))->format('F j'); ?>
-                        </a>
-                    </li>
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th width="20%">Theatre</th>
-                            <th>Shows</th>
-                        </tr>
-                    </thead>
+                            <div class="col s12 m6 l6">
+                                <ul class="tabs">
+                                    <li class="tab col s3 "><a href="#<?php echo (new DateTime('today'))->format('Y-m-d'); ?>" class="active blue-text" >
+                                        <?php echo (new DateTime('today'))->format('F j'); ?>
+                                        </a>
+                                    </li>
+                                    <li class="tab col s3"><a href="#<?php echo (new DateTime('today + 1 day'))->format('Y-m-d'); ?>" class="blue-text" >
+                                            <?php echo (new DateTime('today + 1 day'))->format('F j'); ?>
+                                        </a>
+                                    </li>
+                                    <li class="tab col s3"><a href="#<?php echo (new DateTime('today + 2 day'))->format('Y-m-d'); ?>" class="blue-text" >
+                                            <?php echo (new DateTime('today + 2 day'))->format('F j'); ?>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <?php foreach ($hmap as $date => $hmap1): ?>
+                            <div id="<?php echo($date); ?>" class="col s12">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="20%">Theatre</th>
+                                        <th>Shows</th>
+                                    </tr>
+                                </thead>
 
-                    <tbody>
-                        <?php foreach ($hmap as $name => $row_arr): ?>
-                        <tr>
-                            <td><?php echo ($name) ?></td>
-                            <td>
-                            <?php foreach ($row_arr as $row): ?>
-                                <a class="waves-effect waves-light btn-large" href="<?php echo ('SeatMap.php?sid=' . $row['sid']); ?>"><?php echo (explode(" ", $row['time']))[1]; ?></a>
+                                <tbody>
+                                    <?php foreach ($hmap1 as $name => $row_arr): ?>
+                                    <tr>
+                                        <td><?php echo ($name) ?></td>
+                                        <td>
+                                        <?php foreach ($row_arr as $row): ?>
+                                            <a class="waves-effect waves-light btn-large" href="<?php echo ('SeatMap.php?sid=' . $row['sid']); ?>"><?php echo (explode(" ", $row['time']))[1]; ?></a>
+                                        <?php endforeach;?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach;?>
+                                </tbody>
+                            </table>
+                            </div>
                             <?php endforeach;?>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
-            </div>
+                        </div>
         </div>
                     </div>
                 </div>

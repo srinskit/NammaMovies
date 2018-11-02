@@ -13,7 +13,7 @@
                     <i class="material-icons right">arrow_drop_down</i></a></li>
                     <ul id="dropdown1" class="dropdown-content">
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="#!">My Tickets</a></li>
+                        <li><a href="profile.php#mytickets">My Tickets</a></li>
                         <li class="divider"></li>
                         <li><a href="logout.php">Logout</a></li>
                     </ul>
