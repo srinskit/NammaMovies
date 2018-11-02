@@ -22,7 +22,7 @@ $trending = [];
 while ($row = mysqli_fetch_assoc($result)) {
     array_push($trending, $row);
 }
-$query = "select mid, mname from movie";
+$query = "select mname, mid from movie";
 $result = mysqli_query($con, $query);
 $all_movies = [];
 while ($row = mysqli_fetch_assoc($result)) {
@@ -39,31 +39,26 @@ mysqli_free_result($result);
         .movie_card .btn-large{
             width: 100%;
         }
-        .search-wrapper {
-            margin: 50px auto;
-        }
     </style>
 
-    <title>Namma Movies</title>
+    <title>Namma Movies | Home</title>
 </head>
 
 <body>
     <?php include 'page_header.php';?>
     <main>
         <div class="container">
+            <div class="section"></div>
             <div class="row">
-                <nav class="search-wrapper">
-                    <div class="nav-wrapper">
-                        <form>
-                            <div class="input-field white">
-                                <input id="search" type="search" class="autocomplete" placeholder="Find a movie!"
-                                    required>
-                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
-                            </div>
-                        </form>
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <i class="material-icons prefix">search</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <label for="autocomplete-input">Find a movie!</label>
+                        </div>
                     </div>
-                </nav>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -74,7 +69,7 @@ mysqli_free_result($result);
                 <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="posters/<?php echo ($movie['mid'].'.jpg'); ?>">
+                            <img class="activator" src="posters/<?php echo ($movie['mid'] . '.jpg'); ?>">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
@@ -83,12 +78,12 @@ mysqli_free_result($result);
                             <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
                             <p><?php echo ($movie['summary']); ?></p>
                             <div class="card-action">
-                                <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
+                                <a href="<?php echo ("movie.php?mid=" . $movie['mid']); ?>" class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
                                     More</a>
                             </div>
                         </div>
                         <div class="card-action">
-                            <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
+                            <a href="<?php echo ("movie.php?mid=" . $movie['mid']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
                                 now</a>
                         </div>
                     </div>
@@ -103,7 +98,7 @@ mysqli_free_result($result);
                 <div class="col s12 m3 l3">
                     <div class="card medium hoverable movie_card">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="posters/<?php echo ($movie['mid'].'.jpg'); ?>">
+                            <img class="activator" src="posters/<?php echo ($movie['mid'] . '.jpg'); ?>">
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
@@ -112,12 +107,12 @@ mysqli_free_result($result);
                             <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
                             <p><?php echo ($movie['summary']); ?></p>
                             <div class="card-action">
-                                <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
+                                <a href="<?php echo ("movie.php?mid=" . $movie['mid']); ?>" class="waves-effect waves-light btn-large blue darken-2"><i class="material-icons right">book</i>Read
                                     More</a>
                             </div>
                         </div>
                         <div class="card-action">
-                            <a href="<?php echo("movie.php?mid=".$movie['mid']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
+                            <a href="<?php echo ("movie.php?mid=" . $movie['mid']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">local_movies</i>Book
                                 now</a>
                         </div>
                     </div>
@@ -128,5 +123,21 @@ mysqli_free_result($result);
     </main>
     <?php include 'page_footer.php';?>
 </body>
+<script>
+   var data = {}, name_id = {};
+   <?php foreach ($all_movies as $row): ?>
+   data["<?php echo $row['mname'] ?>"] ="<?php echo 'posters/' . $row['mid'] ?>.jpg";
+   name_id["<?php echo $row['mname'] ?>"] = <?php echo $row['mid'] ?>;
+   <?php endforeach;?>
+   console.log(data);
+    $(document).ready(function(){
+        $('input.autocomplete').autocomplete({
+            data: data,
+            onAutocomplete: function(movie_name){
+                window.location = `movie.php?mid=${name_id[movie_name]}`;
+            }
+        });
+    });
+</script>
 <?php include 'common_scripts.php';?>
 </html>

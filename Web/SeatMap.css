@@ -17,9 +17,7 @@
 	background: #D8D8D8 ;
   position: absolute;
 }
-#sub{
-  float:right;
-}
+
 #div-inline{float: left; }
 
 .outer-seat:hover{

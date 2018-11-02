@@ -48,6 +48,7 @@ function login($username, $password)
 <head>
     <meta charset="utf-8" />
     <?php include 'common_heads.php';?>
+    <title>Namma Movies | Login</title>
 </head>
 
 <body>

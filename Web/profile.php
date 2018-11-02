@@ -174,8 +174,8 @@ if ($_SESSION['user_details']['logged_in'] == false) {
                                 <p class="card-text"><?php echo((date("F jS, Y", strtotime($movie['time'])))); ?></p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Theatre: <?php echo($movie['tname']); ?></li>
                                 <li class="list-group-item">Seat num: <?php echo($movie['seat_num']); ?></li>
+                                <li class="list-group-item"><?php echo($movie['tname'].', '.$movie['address']); ?></li>
                             </ul>
                         </div>
                     </div>

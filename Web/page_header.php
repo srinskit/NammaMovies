@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
     <nav class="header-nav">
         <div class="nav-wrapper blue darken-2">
-            <a href="home.php" class="brand-logo">Namma Movies</a>
+            <a href="home.php" class="brand-logo"><i class="material-icons">local_movies</i> Namma Movies</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="home.php">Home</a></li>
                 <li><a href="about.php">About</a></li>

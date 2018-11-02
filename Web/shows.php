@@ -27,12 +27,11 @@ if (!$result) {
 $query = "select t.tname as name, t.address as addr, s.time as time, s.sid as sid from theatre t, shows s where t.tid = s.tid and s.mid = $mid";
 $r1 = mysqli_query($con, $query);
 $hmap = [];
-if(!$r1){
+if (!$r1) {
     echo 'HS quota';
-}
-else{
-    while ($row = mysqli_fetch_array($r1)){
-        if(!array_key_exists($row['name'], $hmap)){
+} else {
+    while ($row = mysqli_fetch_array($r1)) {
+        if (!array_key_exists($row['name'], $hmap)) {
             $hmap[$row['name']] = [];
         }
         array_push($hmap[$row['name']], $row);
@@ -58,29 +57,22 @@ else{
                         <img src="<?php echo ($movie['poster']); ?>" style="height: 250px ;z-index: 1;position: relative;">
                     </div>
                     <div class="card-content">
-                        <h4><?php echo($movie['mname']); ?></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+                        <h3><?php echo ($movie['mname']); ?></h3>
+                        <div class="section"></div>
+                        <div class="row">
             <div class="col s12 m6 l6">
                 <ul class="tabs">
-                    <li class="tab col s3 "><a href="#test1" class="active blue-text" ><?php
-$today = date("F j");
-
-print $today;
-?></a></li>
-                        <li class="tab col s3"><a href="#test2"  class="blue-text" >
-                            <?php
-$datetime = new DateTime('tomorrow');
-echo $datetime->format('F j');
-?>
-                        </a></li>
-                        <li class="tab col s3"><a href="#test4" class="blue-text" >  <?php
-$datetime = new DateTime('tomorrow + 1 day');
-echo $datetime->format('F j');
-?></a></li>
+                    <li class="tab col s3 "><a href="#test1" class="active blue-text" >
+                        <?php print date("F j");?></a>
+                    </li>
+                    <li class="tab col s3"><a href="#test2"  class="blue-text" >
+                            <?php echo (new DateTime('tomorrow'))->format('F j'); ?>
+                        </a>
+                    </li>
+                    <li class="tab col s3"><a href="#test4" class="blue-text" >
+                            <?php echo (new DateTime('tomorrow + 1 day'))->format('F j'); ?>
+                        </a>
+                    </li>
                     </ul>
                 </div>
             </div>
@@ -88,26 +80,31 @@ echo $datetime->format('F j');
                 <table>
                     <thead>
                         <tr>
-                            <th>Theatre Names</th>
-                            <th>Food and beverages available</th>
-
+                            <th width="20%">Theatre</th>
+                            <th>Shows</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <?php foreach ($hmap as $name => $row_arr): ?>                        
+                        <?php foreach ($hmap as $name => $row_arr): ?>
                         <tr>
-                            <td><?php echo($name) ?></td>
+                            <td><?php echo ($name) ?></td>
                             <td>
-                            <?php foreach ($row_arr as $row): ?>                        
-                                <a class="waves-effect waves-light btn-large" href="<?php echo('SeatMap.php?sid='.$row['sid']); ?>"><?php echo($row['time']); ?></a>
-                            <?php endforeach;?>                            
+                            <?php foreach ($row_arr as $row): ?>
+                                <a class="waves-effect waves-light btn-large" href="<?php echo ('SeatMap.php?sid=' . $row['sid']); ?>"><?php echo (explode(" ", $row['time']))[1]; ?></a>
+                            <?php endforeach;?>
                             </td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>
                 </table>
             </div>
+        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         </main>
         <?php include 'page_footer.php';?>
     </body>
