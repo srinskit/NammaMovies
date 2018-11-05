@@ -14,6 +14,9 @@
                     <ul id="dropdown1" class="dropdown-content">
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="profile.php#mytickets">My Tickets</a></li>
+                        <?php if($_SESSION['user_details']['level'] <= 0): ?>
+                        <li><a href="admin.php">Admin tools</a></li>
+                        <?php endif; ?>
                         <li class="divider"></li>
                         <li><a href="logout.php">Logout</a></li>
                     </ul>

@@ -15,13 +15,15 @@ function login($username, $password)
     global $con, $red_msg, $green_msg;
     $uname = mysqli_real_escape_string($con, $username);
     $pwd = mysqli_real_escape_string($con, $password);
-    $query = "select * from users where uname = '$uname' and pwd = '$pwd'";
+    $query = "select level from users where uname = '$uname' and pwd = '$pwd'";
     $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) === 0) {
         $red_msg = 'Login failed';
     } else {
         $_SESSION['user_details']['logged_in'] = true;
         $_SESSION['user_details']['username'] = $uname;
+        $user = mysqli_fetch_assoc($result);
+        $_SESSION['user_details']['level'] = $user['level'];
         header("Location: home.php");
         die();
     }

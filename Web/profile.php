@@ -13,7 +13,7 @@ if ($_SESSION['user_details']['logged_in'] == false) {
     header("Location: login.php");
     die();
 } else {
-    $query = "select m.mid as xmid, mname, seat_num, tname, address, time, st.sid from seats st, shows s, movie m, theatre t where st.sid = s.sid and s.mid = m.mid and t.tid = s.tid and uname='" . $_SESSION['user_details']['username'] . "'";
+    $query = "select m.mid as xmid, mname, seat_num, tname, address, time, st.sid as sid from seats st, shows s, movie m, theatre t where st.sid = s.sid and s.mid = m.mid and t.tid = s.tid and uname='" . $_SESSION['user_details']['username'] . "'";
     $result = mysqli_query($con, $query);
 }
 ?>
@@ -68,6 +68,8 @@ if ($_SESSION['user_details']['logged_in'] == false) {
                             <h6><?php echo ((date("F jS, Y", strtotime($movie['time'])))); ?></h6>
                             <div class="divider"></div>
                             <h6>Seat num: <?php echo ($movie['seat_num']); ?></h6>
+                            <div class="divider"></div>
+                            <h6><?php echo ('TNR: NM'.$movie['sid'].'-'.$movie['seat_num']); ?></h6>
                             <div class="divider"></div>
                             <h6><?php echo 'Theatre: '.($movie['tname']); ?></h6>
                             <div class="divider"></div>

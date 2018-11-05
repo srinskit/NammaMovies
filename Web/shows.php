@@ -26,7 +26,7 @@ if (!$result) {
 }
 $query = "select t.tname as name, t.address as addr, s.time as time, s.sid as sid from theatre t, shows s where t.tid = s.tid and s.mid = $mid";
 $r1 = mysqli_query($con, $query);
-$hmap = [(new DateTime('today - 5 day'))->format('Y-m-d') => [], (new DateTime('today - 5 day + 1 day'))->format('Y-m-d') => [], (new DateTime('today - 5 day + 2 day'))->format('Y-m-d') => []];
+$hmap = [(new DateTime('today'))->format('Y-m-d') => [], (new DateTime('today + 1 day'))->format('Y-m-d') => [], (new DateTime('today + 2 day'))->format('Y-m-d') => []];
 if (!$r1) {
     echo 'HS quota';
 } else {
@@ -66,16 +66,16 @@ if (!$r1) {
                         <div class="row">
                             <div class="col s12 m6 l6">
                                 <ul class="tabs">
-                                    <li class="tab col s3 "><a href="#<?php echo (new DateTime('today - 5 day'))->format('Y-m-d'); ?>" class="active blue-text" >
-                                        <?php echo (new DateTime('today - 5 day'))->format('F j'); ?>
+                                    <li class="tab col s3 "><a href="#<?php echo (new DateTime('today'))->format('Y-m-d'); ?>" class="active blue-text" >
+                                        <?php echo (new DateTime('today'))->format('F j'); ?>
                                         </a>
                                     </li>
-                                    <li class="tab col s3"><a href="#<?php echo (new DateTime('today - 5 day + 1 day'))->format('Y-m-d'); ?>" class="blue-text" >
-                                            <?php echo (new DateTime('today - 5 day + 1 day'))->format('F j'); ?>
+                                    <li class="tab col s3"><a href="#<?php echo (new DateTime('today + 1 day'))->format('Y-m-d'); ?>" class="blue-text" >
+                                            <?php echo (new DateTime('today + 1 day'))->format('F j'); ?>
                                         </a>
                                     </li>
-                                    <li class="tab col s3"><a href="#<?php echo (new DateTime('today - 5 day + 2 day'))->format('Y-m-d'); ?>" class="blue-text" >
-                                            <?php echo (new DateTime('today - 5 day + 2 day'))->format('F j'); ?>
+                                    <li class="tab col s3"><a href="#<?php echo (new DateTime('today + 2 day'))->format('Y-m-d'); ?>" class="blue-text" >
+                                            <?php echo (new DateTime('today + 2 day'))->format('F j'); ?>
                                         </a>
                                     </li>
                                 </ul>
