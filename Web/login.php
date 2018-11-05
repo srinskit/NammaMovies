@@ -10,20 +10,6 @@ if (!isset($_SESSION['user_details'])) {
 require_once 'config.php';
 $red_msg = null;
 $green_msg = null;
-function signup($username, $password, $level)
-{
-    global $con, $red_msg, $green_msg;
-    $uname = mysqli_real_escape_string($con, $username);
-    $pwd = mysqli_real_escape_string($con, $password);
-    $level = mysqli_real_escape_string($con, $level);
-    $query = "insert into users values('$uname', '$pwd', $level)";
-    $result = mysqli_query($con, $query);
-    if (!$result) {
-        $red_msg = 'Fill all fields or choose a different username';
-    } else {
-        $green_msg = 'Signup success';
-    }
-}
 function login($username, $password)
 {
     global $con, $red_msg, $green_msg;
@@ -40,7 +26,6 @@ function login($username, $password)
         die();
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,13 +39,13 @@ function login($username, $password)
 <body>
     <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['command'])) {
+    if (isset($_POST['username_autofill'])) {
+        
+    }
+    else if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['command'])) {
         switch ($_POST['command']) {
             case 'login':
                 login($_POST['username'], $_POST['password']);
-                break;
-            case 'signup':
-                $result = signup($_POST['username'], $_POST['password'], 0);
                 break;
             default:
                 break;
@@ -81,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="section"></div>
                             <div class="row">
                                 <div class="input-field">
-                                    <input name="username" id="username" type="text" class="validate"><label for="username">Username</label>
+                                    <input value="<?php if (isset($_POST['username_autofill'])) echo $_POST['username_autofill']; else echo ''; ?>" required name="username" id="username" type="text" class="validate" <?php if (isset($_POST['username_autofill'])) echo ''; else echo 'autofocus'; ?> ><label for="username">Username</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field">
-                                    <input name="password" id="password" type="password" class="validate"><label for="password">Password</label>
+                                    <input <?php if (isset($_POST['username_autofill'])) echo 'autofocus'; else echo ''; ?> required name="password" id="password" type="password" class="validate"><label for="password">Password</label>
                                 </div>
                             </div>
                             <?php if ($green_msg != null): ?>
@@ -97,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php endif;?>
                         </div>
                         <div class="card-action">
-                            <button name="command" value="signup" class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Sign up</button>
+                            <a href="signup.php" class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Sign up</a>
                             <button name="command" value="login" class="waves-effect waves-light btn-large  blue darken-2"><i class="material-icons right"></i>Login</button>
                         </div>
                     </form>

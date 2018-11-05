@@ -39,6 +39,7 @@ mysqli_free_result($result);
         .movie_card .btn-large{
             width: 100%;
         }
+        /* html {background-color: #454545} */
     </style>
 
     <title>Namma Movies | Home</title>

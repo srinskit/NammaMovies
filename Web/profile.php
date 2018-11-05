@@ -13,7 +13,7 @@ if ($_SESSION['user_details']['logged_in'] == false) {
     header("Location: login.php");
     die();
 } else {
-    $query = "select m.mid as xmid, mname, seat_num, tname, address, time from seats st, shows s, movie m, theatre t where st.sid = s.sid and s.mid = m.mid and t.tid = s.tid and uname='".$_SESSION['user_details']['username']."'";
+    $query = "select m.mid as xmid, mname, seat_num, tname, address, time, st.sid from seats st, shows s, movie m, theatre t where st.sid = s.sid and s.mid = m.mid and t.tid = s.tid and uname='" . $_SESSION['user_details']['username'] . "'";
     $result = mysqli_query($con, $query);
 }
 ?>
@@ -26,6 +26,11 @@ if ($_SESSION['user_details']['logged_in'] == false) {
 	<title>
 		Namma Movies
 	</title>
+    <style>
+        .movie_card .btn-large{
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <?php include 'page_header.php';?>
@@ -35,7 +40,7 @@ if ($_SESSION['user_details']['logged_in'] == false) {
             <div class="card">
                 <div class="card-image">
                 <img height="200px" src="images/back.jpg">
-                    <span class="card-title"><?php echo(ucfirst($_SESSION['user_details']['username'])); ?></span>
+                    <span class="card-title"><?php echo (ucfirst($_SESSION['user_details']['username'])); ?></span>
                 </div>
             </div>
             </div>
@@ -45,18 +50,31 @@ if ($_SESSION['user_details']['logged_in'] == false) {
             <h4>Tickets</h4>
             <?php while ($movie = mysqli_fetch_array($result)): ?>
                 <div class="col s12 m4 l3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <img src="<?php echo('posters/'.$movie['xmid'].'.jpg'); ?>">
+                    <div class="card medium hoverable movie_card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="<?php echo ('posters/' . $movie['xmid'] . '.jpg'); ?>">
                         </div>
                         <div class="card-content">
-                            <h5><?php echo($movie['mname']); ?></h5>
+                            <span class="card-title activator grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">more_vert</i></span>
                             <div class="divider"></div>
-                            <h6><?php echo((date("F jS, Y", strtotime($movie['time'])))); ?></h6>
+                            <h6><?php echo ((date("F jS, Y", strtotime($movie['time'])))); ?></h6>
                             <div class="divider"></div>
-                            <h6>Seat num: <?php echo($movie['seat_num']); ?></h6>
+                            <h6 class="left"><?php echo ($movie['tname']); ?></h6>
+                            <h6 class="right"><?php echo ($movie['seat_num']); ?></h6>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4"><?php echo ($movie['mname']); ?><i class="material-icons right">close</i></span>
+                            <div class="section"></div>
+                            <h6><?php echo ((date("F jS, Y", strtotime($movie['time'])))); ?></h6>
                             <div class="divider"></div>
-                            <h6><?php echo($movie['tname'].', '.$movie['address']); ?></h6>
+                            <h6>Seat num: <?php echo ($movie['seat_num']); ?></h6>
+                            <div class="divider"></div>
+                            <h6><?php echo 'Theatre: '.($movie['tname']); ?></h6>
+                            <div class="divider"></div>
+                            <h6><?php echo ($movie['address']); ?></h6>
+                            <div class="card-action">
+                                <a href="<?php echo ("cancel.php?sid=" . $movie['sid'].'&seat_num='.$movie['seat_num']); ?>" class="waves-effect waves-light btn-large red"><i class="material-icons right">cancel</i>Cancel ticket</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +82,7 @@ if ($_SESSION['user_details']['logged_in'] == false) {
             </div>
         </div>
 
-    
+
     </main>
     <?php include 'page_footer.php';?>
 </body>

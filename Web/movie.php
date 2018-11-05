@@ -30,8 +30,54 @@ if (!isset($_GET['mid'])) {
 <head>
     <meta charset="utf-8" />
     <?php include 'common_heads.php';?>
-    <link rel="stylesheet" type="text/css" href="movie_page_style.css">
 	<title>Namma Movies | <?php echo ($movie['mname']); ?> </title>
+    <style>
+        html {background-color: #454545}
+        .poster {
+            padding: 20px;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .description {
+            font-weight: bold;
+            color: white;
+        }
+        .button {
+        margin-top: 0;
+        margin-left: 300px;
+        background: #F08080;
+        width: 500px;
+        padding: 5px 0;
+        position: absolute;
+        border-radius: 3px;
+        }
+        .button p {
+            font-size: 100%;
+            font-family: sans-serif;
+            font-style: verdana;
+            text-align: center;
+            text-transform: uppercase;
+            color: #FFF;
+            user-select: none
+        }
+        .trailer {
+            float: left;
+            margin-left: 20px;
+            border: hidden;
+        }
+
+        .rating {
+            font-size: 100%;
+            font-style: verdana;
+            color: white;
+        }
+        .cast_list {
+            width: 500px;
+            font-style: verdana;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <?php include 'page_header.php';?>
@@ -61,7 +107,7 @@ if (!isset($_GET['mid'])) {
             <div class="row">
                 <div class="col s12 m6 l6">
                     <iframe width="500" height="315" src="<?php echo ($movie['trailer']); ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div> 
+                </div>
                 <div class="col s12 m6 l6">
                     <div class="flow-text"><?php echo ($movie['summary']); ?></div>
                     <div class="section"></div>
@@ -74,8 +120,8 @@ if (!isset($_GET['mid'])) {
                             <img src="<?php echo ('/images/actors/' . $movie['a2'] . '.png'); ?>" width="50px" alt="A"
                                     class="circle hoverable responsive-img">
                         </div>
-                    </div>        
-                </div> 
+                    </div>
+                </div>
             </div>
         </div>
 	</div>
