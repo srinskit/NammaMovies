@@ -100,7 +100,7 @@ if (!$r1) {
                                         <td><?php echo ($name) ?></td>
                                         <td>
                                         <?php foreach ($row_arr as $row): ?>
-                                            <a class="waves-effect waves-light btn-large blue darken-2" href="<?php echo ('SeatMap.php?sid=' . $row['sid']); ?>"><?php echo date('h:i a', strtotime($date)); ?></a>
+                                            <a class="waves-effect waves-light btn-large blue darken-2" href="<?php echo ('SeatMap.php?sid=' . $row['sid']); ?>"><?php echo date('h:i a', strtotime($row['time'])); ?></a>
                                         <?php endforeach;?>
                                         </td>
                                     </tr>

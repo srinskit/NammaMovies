@@ -91,7 +91,7 @@ if (!isset($_GET['mid'])) {
 	      <div class="col s2"><blockquote class="description"><?php echo ($movie['language']); ?></blockquote></div>
 	      <div class="col s2"><blockquote class="description"><?php echo ($movie['genre']); ?></blockquote></div>
 	      <div class="col s2"><blockquote class="description"><?php echo (date("F jS, Y", strtotime($movie['releasedate']))); ?></blockquote></div>
-	      <div class="col s2"><blockquote class="description"><?php echo ($movie['runningtime'] . ' minutes'); ?></blockquote></div>
+	      <div class="col s2"><blockquote class="description"><?php echo ($movie['runningtime']); ?></blockquote></div>
 	      <div class="col s2"><blockquote class="description"><?php echo ($movie['rating']); ?></blockquote></div>
     	</div>
     </div>
@@ -111,16 +111,6 @@ if (!isset($_GET['mid'])) {
                 <div class="col s12 m6 l6">
                     <div class="flow-text"><?php echo ($movie['summary']); ?></div>
                     <div class="section"></div>
-                    <div class="row">
-                        <div class="col s6 m2 l2">
-                            <img src="<?php echo ('/images/actors/' . $movie['a1'] . '.png'); ?>" width="50px" alt="A"
-                                    class="circle hoverable responsive-img">
-                        </div>
-                        <div class="col s6 m2 l2">
-                            <img src="<?php echo ('/images/actors/' . $movie['a2'] . '.png'); ?>" width="50px" alt="A"
-                                    class="circle hoverable responsive-img">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

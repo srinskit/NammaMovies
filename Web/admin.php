@@ -57,15 +57,18 @@ function add_movie($name, $trailer, $poster){
         $red_msg = $result['error'];
     }
     else{
-        $mid = 10;
-        $query = "insert into movie values(".$mid.",'".$result['title']."','".$result['plot']."',1,2,'$poster','$trailer','UA','".$result['language'][0]."','".$result['genres'][0]."','".$result['release_date']."',".$result['runtime'].",".$result['rating'];
-        file_put_contents("./posters/$mid.jpg", fopen($result['poster'], 'r'));
-        echo $query;
-        if(false){
-            $red_msg = 'There was an error';
-        }
-        else{
-            $green_msg = 'Added!';
+        $poster1 = $result['poster'];
+        $query = "insert into movie (mname, summary, a1, a2, poster, trailer, certificate, language, genre, releasedate, runningtime, rating) values(\"".$result['title']."\",\"".$result['plot']."\",1,2,\"$poster\",\"$trailer\",\"UA\",\"".$result['language'][0]."\",\"".$result['genres'][0]."\",\"".$result['release_date']."\",\"".$result['runtime']."\",".$result['rating'].")";
+        $result = mysqli_query($con, $query);
+        if (mysqli_affected_rows($con) == 0) {
+            $red_msg = 'Invalid movie or movie already exists';
+        } else {
+            $query = "select mid from movie where mname = \"$name\"";
+            $result = mysqli_query($con, $query);
+            $r = mysqli_fetch_assoc($result);
+            $mid = $r['mid'];
+            file_put_contents("./posters/$mid.jpg", fopen($poster1, 'r'));
+            $green_msg = 'Added movie!';
         }
     }
 }
