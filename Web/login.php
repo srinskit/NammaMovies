@@ -95,5 +95,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'page_footer.php';?>
 </body>
 <?php include 'common_scripts.php';?>
-
 </html>
